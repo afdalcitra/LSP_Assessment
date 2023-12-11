@@ -4,19 +4,22 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBooksTable extends Migration
+class CreateInstrumentsTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('books', function (Blueprint $table) {
+        Schema::create('instruments', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('author');
+            $table->string('name');
+            $table->string('type');
+            $table->string('brand');
             $table->text('description');
-            $table->integer('available_quantity');
+            $table->integer('stock_quantity');
+            $table->decimal('rental_price', 8, 2);
+            $table->string('condition')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateBooksTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('books');
+        Schema::dropIfExists('instruments');
     }
 };

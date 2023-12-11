@@ -4,23 +4,23 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBookUserTable extends Migration
+class CreateInstrumentUserTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('book_user', function (Blueprint $table) {
+        Schema::create('instrument_user', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('book_id');
-            $table->timestamp('reserved_at')->nullable();
+            $table->unsignedBigInteger('instrument_id');
+            $table->timestamp('rented_at')->nullable();
             $table->timestamp('returned_at')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('book_id')->references('id')->on('books');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('instrument_id')->references('id')->on('instruments')->onDelete('cascade');
         });
     }
 
@@ -29,6 +29,6 @@ class CreateBookUserTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('book_user');
+        Schema::dropIfExists('instrument_user');
     }
 };
