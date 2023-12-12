@@ -5,24 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
 
     // Show login form
     public function viewLogin()
-    {
+{
+    $user = auth()->user();
 
-        $role = session('role');
+    if ($user) {
+        $role = $user->role; // Assuming you have a 'role' column in your users table
 
         if ($role == "admin") {
-            return redirect('/homepage');
+            return redirect('/admin/dashboard');
         } else if ($role == "customer") {
             return redirect('/homepage');
-        } else {
-            return view('auth.login');
         }
     }
+
+    return view('auth.login');
+}
 
     // Handle login
     public function login(Request $request)
@@ -41,40 +45,12 @@ class AuthController extends Controller
             if ($user->role === 'customer') {
                 return redirect()->intended('/homepage'); // Redirect to homepage for customers
             } elseif ($user->role === 'admin') {
-                return redirect()->intended('/forget'); // Redirect to adminpage for admins
+                return redirect()->intended('/admin/dashboard'); // Redirect to adminpage for admins
             }
         }
         // Authentication failed
         return back()->withErrors(['email' => 'Invalid credentials']);
     }
-
-    protected function authenticated(Request $request, $user)
-    {
-        if ($user->role === 'customer') {
-            return redirect()->route('home'); // Adjust the route name based on your setup
-        }
-
-        return redirect()->intended($this->redirectPath());
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     // Show registration form
     public function showRegistrationForm()
@@ -103,11 +79,10 @@ class AuthController extends Controller
 
     // Handle logout
     public function logout(Request $request)
-    {
-        Auth::logout();
-
-        return redirect('/');
-    }
+{
+    Auth::logout();
+    return redirect('/');
+}
 
     // Show forget password form
     public function showForgetPasswordForm()

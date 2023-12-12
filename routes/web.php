@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +18,31 @@ use App\Http\Controllers\Auth\RegisterController;
 
 // Init Routes
 Route::get('/', [AuthController::class, 'viewLogin'])->name('viewLogin');
-
-// Login routes
 Route::post('/loginattempt', [AuthController::class, 'login'])->name('login');;
+
+//Logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+//User
+Route::group(['middleware' => 'customer'], function () {
+    
+    Route::get('/user/profile', [UserController::class, 'showProfileForm'])->name('showProfileForm');
+    
+    Route::get('/user/edit', [UserController::class, 'editProfileForm'])->name('editProfileForm');
+
+    Route::post('/user/edit', [UserController::class, 'editProfileUpdate'])->name('editProfileUpdate');
+    
+
+    
+});
+
+//Admin
+Route::group(['middleware' => 'admin'], function () {
+    
+    Route::get('/admin/dashboard', [AdminController::class, 'showDashboard'])->name('showDashboard');
+
+    
+});
 
 // Homepage Routes
 Route::get('/homepage', [AuthController::class, 'showHomepageForm'])->name('homepage');
