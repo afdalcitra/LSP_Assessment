@@ -1,5 +1,23 @@
-# LSP_Assessment
-Mini Project untuk Assessment Sertifikasi LSP beranggotakan Afdal Citra Habibi &amp; Muhammad Rizki
+# ZENITH
+Mini Project untuk Assessment Sertifikasi LSP beranggotakan:
+Afdal Citra Habibi &amp; Muhammad Rizki
+
+Project ini dinamakan dengan RUMAH MUSIK
+
+## RUMAH MUSIK
+Tempat menyediakan jasa rental alat-alat musik yang dapat mempermudah kamu dalam setup keperluan musik kamu!
+Fitur yang disediakan:
+-Account Management (Register, Login, Update Profile, Ganti Password)
+-Homepage
+-Update data user (admin side)
+-Create / Update data unit (admin side)
+-Peminjaman unit untuk member yang gampang
+-Laporan Pengembalian Unit
+-History Peminjaman
+-Cetak History
+
+## FRAMEWORK
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -8,6 +26,9 @@ Mini Project untuk Assessment Sertifikasi LSP beranggotakan Afdal Citra Habibi &
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
+
+## Scheme & Demo
+TO BE ANNOUNCED
 
 ## About Laravel
 
