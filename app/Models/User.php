@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -40,6 +41,14 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+    ];
+
+    /**
+     * The default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'role' => 'customer', // Set the default value for 'role' to 'customer'
     ];
 }
