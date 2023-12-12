@@ -15,9 +15,12 @@ use App\Http\Controllers\Auth\RegisterController;
 |
 */
 
-Route::get('/', function () {
-    return view('homepage');
-});
+// Init Routes
+Route::get('/', [AuthController::class, 'viewLogin'])->name('viewLogin');
+
+// Login routes
+Route::post('/loginattempt', [AuthController::class, 'login'])->name('login');;
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Homepage Routes
 Route::get('/homepage', [AuthController::class, 'showHomepageForm'])->name('homepage');
@@ -27,10 +30,6 @@ Route::post('/homepage', [AuthController::class, 'homepage']);
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 
-// Login routes
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Forget Password Routes
 Route::get('/forget', [AuthController::class, 'showForgetPasswordForm'])->name('forget');

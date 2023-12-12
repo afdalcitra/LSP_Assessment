@@ -9,6 +9,73 @@ use App\Models\User;
 class AuthController extends Controller
 {
 
+    // Show login form
+    public function viewLogin()
+    {
+
+        $role = session('role');
+
+        if ($role == "admin") {
+            return redirect('/homepage');
+        } else if ($role == "customer") {
+            return redirect('/homepage');
+        } else {
+            return view('auth.login');
+        }
+    }
+
+    // Handle login
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email'    => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+    
+            // Check user's role and redirect accordingly
+            if ($user->role === 'customer') {
+                return redirect()->intended('/homepage'); // Redirect to homepage for customers
+            } elseif ($user->role === 'admin') {
+                return redirect()->intended('/forget'); // Redirect to adminpage for admins
+            }
+        }
+        // Authentication failed
+        return back()->withErrors(['email' => 'Invalid credentials']);
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->role === 'customer') {
+            return redirect()->route('home'); // Adjust the route name based on your setup
+        }
+
+        return redirect()->intended($this->redirectPath());
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // Show registration form
     public function showRegistrationForm()
     {
@@ -32,27 +99,6 @@ class AuthController extends Controller
 
         // Redirect to home or dashboard
         return redirect('/');
-    }
-
-    // Show login form
-    public function showLoginForm()
-    {
-        return view('auth.login');
-    }
-
-    // Handle login
-    public function login(Request $request)
-    {
-        // Add validation logic here
-
-        // Attempt to log in the user
-        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
-            // Authentication passed...
-            return redirect()->intended('/');
-        }
-
-        // Authentication failed...
-        return redirect()->route('login')->with('error', 'Invalid login credentials');
     }
 
     // Handle logout
