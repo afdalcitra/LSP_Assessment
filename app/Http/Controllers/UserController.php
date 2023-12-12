@@ -38,7 +38,13 @@ class UserController extends Controller
     // Update user fields with the form data
     $user->name = $request->input('name');
     $user->email = $request->input('email');
-    $user->password = bcrypt($request->input('password')); // Note: Hash the password appropriately
+
+    // Check if a new password is provided
+    $newPassword = $request->input('password');
+    if ($newPassword) {
+        // Hash the new password
+        $user->password = bcrypt($newPassword);
+    }
 
     // Add other fields as needed
 
