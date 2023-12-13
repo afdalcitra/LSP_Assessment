@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Instrument;
+use App\Models\Reservation;
 use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
@@ -40,10 +42,12 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
+            $instruments = Instrument::all();
     
             // Check user's role and redirect accordingly
             if ($user->role === 'customer') {
-                return redirect()->intended('/homepage'); // Redirect to homepage for customers
+                $instruments = Instrument::all();
+                return view('homepage', compact('instruments')); // Pass instruments to homepage view for customers
             } elseif ($user->role === 'admin') {
                 return redirect()->intended('/admin/dashboard'); // Redirect to adminpage for admins
             }
@@ -93,9 +97,10 @@ class AuthController extends Controller
     // Handel forget password form
 
     // Show Homepage form
-    public function showHomepageForm()
+    public function showHomepage()
     {
-        return view('homepage');
+        $instruments = Instrument::all();
+        return view('homepage', compact('instruments'));
     }
     
 }

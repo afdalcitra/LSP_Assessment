@@ -18,4 +18,10 @@ class Instrument extends Model
         'rental_price',
         'condition',
     ];
+
+    public function reservations()
+{
+    return $this->hasMany(Reservation::class);
+}
+
 }

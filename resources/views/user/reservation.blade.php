@@ -22,21 +22,23 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Fame 5 PC Junior Drumset Black Luis</td>
-                <td>Drumset</td>
-                <td>Fame</td>
-                <td>Mapex Saturn V, 5 Piece Drumset, Natural Maple Burl Finish, Maple/Walnut Hybrid Shell</td>
-                <td>1</td>
-                <td>Rp250.000</td>
-                <td>Good</td>
-            </tr>
+            @foreach($instruments as $instrument)
+                <tr>
+                    <td>{{ $instrument->name }}</td>
+                    <td>{{ $instrument->type }}</td>
+                    <td>{{ $instrument->brand }}</td>
+                    <td>{{ $instrument->description }}</td>
+                    <td>{{ $instrument->stock_quantity }}</td>
+                    <td>{{ $instrument->rental_price }}</td>
+                    <td>{{ $instrument->condition }}</td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 
     <div class="row justify-content-end">
         <div class="col-lg-2">
-            <p class="font-weight-bold">Total Price: Rp250.000</p>
+            <p class="font-weight-bold">Total Price: Rp{{ $totalPrice }}</p>
         </div>
         <div class="col-lg-1">
             <a class="btn btn-primary" href="{{ route('showReservationHistory') }}">Pay</a>

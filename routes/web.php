@@ -35,7 +35,11 @@ Route::group(['middleware' => 'customer'], function () {
 
     Route::get('/user/reservation', [UserController::class, 'showReservationTable'])->name('showReservationTable');
     
+    Route::get('/user/reservation', [InstrumentController::class, 'showReservationDetails'])->name('reservationDetails');
+    
     Route::get('/user/history', [UserController::class, 'showReservationHistory'])->name('showReservationHistory');
+
+    Route::post('/user/history/{instrumentId}', [InstrumentController::class, 'rentNow'])->name('rentNow');
     
 
     
@@ -50,7 +54,7 @@ Route::group(['middleware' => 'admin'], function () {
 });
 
 // Homepage Routes
-Route::get('/homepage', [AuthController::class, 'showHomepageForm'])->name('homepage');
+Route::get('/homepage', [AuthController::class, 'showHomepage'])->name('homepage');
 Route::post('/homepage', [AuthController::class, 'homepage']);
 
 // Registration routes
@@ -62,4 +66,4 @@ Route::get('/forget', [AuthController::class, 'showForgetPasswordForm'])->name('
 Route::post('/forget', [AuthController::class, 'forget']);
 
 //Miscellenaous
-//Route::get('/user/reservation', [InstrumentController::class, 'showReservationDetails'])->name('reservationDetails');
+
