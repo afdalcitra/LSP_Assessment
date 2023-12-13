@@ -19,7 +19,7 @@
                 <div class="card-body" style="height: 250px;">
                     <h5 class="card-title">Fame 5 PC Junior Drumset Black Luis</h5>
                     <p class="card-text">Mapex Saturn V, 5 Piece Drumset, Natural Maple Burl Finish, Maple/Walnut Hybrid Shell</p>
-                    <a href="#" class="btn btn-primary">Rent Now</a>
+                    <a href="{{ route('showReservationTable') }}" class="btn btn-primary">Rent Now</a>
                 </div>
             </div>
         </div>

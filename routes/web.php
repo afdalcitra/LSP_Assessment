@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\InstrumentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,10 @@ Route::group(['middleware' => 'customer'], function () {
     Route::get('/user/edit', [UserController::class, 'editProfileForm'])->name('editProfileForm');
 
     Route::post('/user/edit', [UserController::class, 'editProfileUpdate'])->name('editProfileUpdate');
+
+    Route::get('/user/reservation', [UserController::class, 'showReservationTable'])->name('showReservationTable');
+    
+    Route::get('/user/history', [UserController::class, 'showReservationHistory'])->name('showReservationHistory');
     
 
     
@@ -52,7 +57,9 @@ Route::post('/homepage', [AuthController::class, 'homepage']);
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 
-
 // Forget Password Routes
 Route::get('/forget', [AuthController::class, 'showForgetPasswordForm'])->name('forget');
 Route::post('/forget', [AuthController::class, 'forget']);
+
+//Miscellenaous
+//Route::get('/user/reservation', [InstrumentController::class, 'showReservationDetails'])->name('reservationDetails');

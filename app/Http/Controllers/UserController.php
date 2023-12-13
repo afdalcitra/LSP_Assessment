@@ -54,5 +54,19 @@ class UserController extends Controller
     return redirect()->route('showProfileForm')->with('success', 'Profile updated successfully!');
 }
 
+    public function showReservationTable()
+    {
+        $user = Auth::user();
+
+        return view('user.reservation', ['user' => $user]);
+    }
+
+    public function showReservationHistory()
+    {
+        $user = Auth::user();
+
+        return view('user.history', ['user' => $user]);
+    }
+
     
 }

@@ -13,7 +13,11 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Rental Now</a>
+                @auth
+                @if(auth()->user()->role == 'customer')
+                <a class="nav-link" href="{{ route('showReservationHistory') }}">History Rental</a>
+                @endif
+                @endauth
             </li>
             <li class="nav-item dropdown" style>
                 @auth
@@ -32,7 +36,9 @@
                 </form>
                     </div>
                 @else
-                    <a class="nav-link" href="#">Login</a>
+                <a class="nav-link" href="{{ route('viewLogin') }}">Login
+                    <span class="sr-only">(current)</span>
+                </a>
                 @endauth
             </li>
         </ul>
